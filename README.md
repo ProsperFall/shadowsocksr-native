@@ -14,13 +14,6 @@ ShadowsocksR-native is written in pure C and only depends on
 [libsodium](https://github.com/jedisct1/libsodium) and
 [json-c](https://github.com/json-c/json-c).
 
-In normal usage, the memory footprint is about 600KB and the CPU utilization is
-no more than 5% on a low-end router (Buffalo WHR-G300N V2 with a 400MHz MIPS CPU,
-32MB memory and 4MB flash).
-
-For a full list of feature comparison between different versions of shadowsocks,
-refer to the [Wiki page](https://github.com/shadowsocksr-live/shadowsocksr-native/wiki/).
-
 ## Encrypto method
 |                  |                  |                 |                 |                 |                |
 | -----|-|-|-|-|-------------- | 
