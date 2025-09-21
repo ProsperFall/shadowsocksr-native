@@ -1,63 +1,10 @@
-<br /><br /><br />
-# Please use <a href="https://github.com/ShadowsocksR-Live/overtls">overtls</a> instead
-<br /><br />
-
-**請使用 [overtls](https://github.com/ShadowsocksR-Live/overtls), 一個新代理，相當於 SSRoT 去掉 SSR 和 SS, 唯獨保留 OT 的 Rust 實現，速度飛快，穩如老狗。**
-
-**Please use [overtls](https://github.com/ShadowsocksR-Live/overtls), a Rust implementation of SSRoT without SSR and SS, only retaining OT, which is fast and stable.**
-
-<br /><br /><br /><br /><br />
-
-![shadowsocksr-native](https://avatars0.githubusercontent.com/u/30504070?s=200&v=4)
-
-<!--
-As I typed each line of code, I was full of fear. Cherish what you using.
-敲下每一行代码时，我都充满了恐惧；大伙且用且珍惜。
--->
-
-# ShadowsocksR-native
-
-[![Join the chat at https://gitter.im/ShadowsocksR-Live/](https://cdn03.gitter.im/_s/9177b02/images/favicon-read.ico)](https://gitter.im/ShadowsocksR-Live/Lobby)
-
-[新特性: GFW 终结者 SSRoT](https://github.com/ShadowsocksR-Live/shadowsocksr-native/wiki)
-
-[写给高危翻墙人士](https://github.com/ShadowsocksR-Live/shadowsocksr-native/wiki/%E5%86%99%E7%BB%99%E9%AB%98%E5%8D%B1%E7%BF%BB%E5%A2%99%E4%BA%BA%E5%A3%AB)
-
-[帮助开发者改善 SSRoT](https://github.com/ShadowsocksR-Live/shadowsocksr-native/wiki/%E5%B8%AE%E5%8A%A9%E4%BD%9C%E8%80%85%E6%94%B9%E5%96%84-SSRoT)
-
-[New feature: GFW terminator SSRoT English tutorial](https://palitechsociety.blogspot.com/2019/08/shadowsocksr-over-tls-ssrot-server.html)
-
-
-## Index
-
-- [ShadowsocksR-native](#shadowsocksr-native)
-  - [Index](#index)
-  - [Intro](#intro)
-  - [Features](#features)
-  - [Encrypto method](#encrypto-method)
-  - [Protocols & obfuscators](#protocols--obfuscators)
-  - [Build](#build)
-    - [Distribution-specific guide](#distribution-specific-guide)
-    - [Debian & Ubuntu](#debian--ubuntu)
-    - [CentOS](#centos)
-    - [macOS](#macos)
-    - [Windows](#windows)
-  - [Usage](#usage)
-  - [Sample configure file](#sample-configure-file)
-  - [cmake](#cmake)
-  - [Deploy server](#deploy-server)
-  - [Stargazers over time](#stargazers-over-time)
+不要点击链接，此仓库只做备份仅用于研究工作原理，请勿传播，仓库内任何有关观点的内容均非本人编撰
+其中包含的任何内容产生的影响归原作者所有。
+我会删除他们
 
 ## Intro
 
 **ShadowsocksR-native** is a lightweight secured SOCKS5 proxy for embedded devices and low-end boxes.
-It's derived from [Shadowsocks-libev](http://shadowsocks.org).
-
-It is a port of [ShadowsocksR](https://github.com/ShadowsocksR-Live/shadowsocksr)
-created by [@breakwa11](https://github.com/breakwa11), 
-which is maintained by [@ssrlive](https://github.com/ssrlive).
-
-Current version: 0.4 | [Changelog](debian/changelog)
 
 ## Features
 
@@ -122,17 +69,10 @@ progress of data flow
 ### Distribution-specific guide
 
 - [Debian & Ubuntu](#debian--ubuntu)
-- [Fedora & RHEL & CentOS](#centos)
-- [macOS](#macos)
-- [Windows](#windows)
 
 * * *
 
 ### Debian & Ubuntu
-
-For Unix-like systems, especially Debian-based systems,
-e.g. Ubuntu, Debian or Linux Mint, you can build the binary like this:
-
 ```bash
 # Debian / Ubuntu
 # sudo su                       # using root account
@@ -157,84 +97,6 @@ sudo apt-get install gcc-multilib -y
 rm -rf *
 cmake -D CMAKE_C_FLAGS=-m32 .. && make
 
-```
-
-The target binaries are `ssr-n/build/src/ssr-server`, `ssr-n/build/src/ssr-client`.
-
-### CentOS
-
-CentOS 7 only. we don't support CentOS 6.x, it's too old.
-
-Before build `ssr-Native`, we must install `cmake` 3.x first. following [this](#cmake) 
-
-```bash
-# CentOS / Fedora / RHEL
-sudo su
-yum install wget git gcc gcc-c++ gdb autoconf automake libtool make asciidoc xmlto -y
-curl https://cmake.org/files/v3.25/cmake-3.25.1-linux-x86_64.sh -o a.sh
-sh a.sh --prefix=/usr/ --exclude-subdir && rm -rf a.sh
-cd /
-git clone --recursive https://github.com/ShadowsocksR-Live/shadowsocksr-native.git ssr-n
-cd ssr-n
-
-# Since there no stdatomic.h exist in CentOS 7, we have to use older libuv version.
-# Fedora / RHEL can skip the steps.
-cd depends/libuv
-git checkout 71932a9fc9e234b3ebac90de0dd061fb00ba191b
-cd ../..
-
-mkdir build && cd build
-cmake .. && make
-# make install
-# /bin/cp -rfa src/ssr-* /usr/bin
-```
-
-The target binaries are `ssr-n/build/src/ssr-server`, `ssr-n/build/src/ssr-client`.
-
-### macOS
-
-For macOS, we must download/install/run [Xcode](https://developer.apple.com/xcode/) first. 
-
-Then use [Homebrew](http://brew.sh) to install or build.
-
-Install Homebrew and tools:
-```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install git cmake automake libtool
-brew upgrade git cmake automake libtool
-```
-Now get source code and build it.
-```bash
-git clone --recursive https://github.com/ShadowsocksR-Live/shadowsocksr-native.git ssr-n
-cd ssr-n
-
-mkdir build && cd build
-cmake .. && make
-```
-
-The target binaries are `ssr-n/build/src/ssr-server`, `ssr-n/build/src/ssr-client`.
-
-### Windows
-
-For Windows, chekout the project using the following commands then open win32/ssr-native.sln with Visual Studio 2010. Enjoy it!
-
-```bash
-git clone --recursive https://github.com/ShadowsocksR-Live/shadowsocksr-native.git ssr-n
-```
-
-## Usage
-
-For a detailed and complete list of all supported arguments, you may refer to the
-man pages of the applications, respectively.
-
-```
-    ssr-[client|local|server]
-
-       [-c <config_file>]         The path to config file
-
-       [-d]                       Run in background as a daemon.
-
-       [-h]                       Show this help message.
 ```
 
 ## Sample configure file
@@ -275,26 +137,6 @@ config.json
 }
 ```
 
-## cmake
-
-In the CentOS 7, the cmake version is too old to work with ShadowsocksR-Native. 
-So we must install it by ourselves.
-
-```bash
-sudo su
-cd /
-wget --no-check-certificate https://cmake.org/files/v3.25/cmake-3.25.1-linux-x86_64.sh -O a.sh
-bash a.sh  --prefix=/usr/ --exclude-subdir
-rm -rf a.sh
-cmake --version
-```
-
-And the `cmake --version` command will output message likes:
-```
-cmake version 3.25.0
-CMake suite maintained and supported by Kitware (kitware.com/cmake).
-```
-
 ## Deploy server
 
 Supporting `CentOS 7` / `Debian` / `Ubuntu` with the following commands
@@ -330,9 +172,4 @@ To uninstall the server, use the following command
 ```
 ./ssrn-install.sh uninstall
 ```
-
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/ShadowsocksR-Live/shadowsocksr-native.svg)](https://starchart.cc/ShadowsocksR-Live/shadowsocksr-native)
       
